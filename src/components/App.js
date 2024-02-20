@@ -60,5 +60,3 @@ function App() {
 }
 
 export default App;
-
-ipfs://bafybeia6mck4a3lnzha372afz5bmscotsmenkkns7rbq3r7t5y7ar5xtd4/1.png
