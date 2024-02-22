@@ -181,7 +181,7 @@ describe('NFT', () => {
 
   })
 
-  describe('Minting', () => {
+  describe('Withdrawing', () => {
 
     describe('Success', async () => {
 
@@ -202,18 +202,23 @@ describe('NFT', () => {
         result = await transaction.wait()
       })
 
-      it('deducts contract balance', async () => {
+      it('deducts the contract balance ', async () => {
         expect(await ethers.provider.getBalance(nft.address)).to.equal(0)
       })
 
-      it('sends funds to the owner', async () => {
+      it('sends funds to owner', async () => {
         expect(await ethers.provider.getBalance(deployer.address)).to.be.greaterThan(balanceBefore)
       })
 
-      it('emits a withdraw event', async () => {
-        expect(transaction).to.emit(nft, 'Withdraw')
+      it('emits Withdraw event', async () => {
+        await expect(transaction).to.emit(nft, 'Withdraw')
           .withArgs(COST, deployer.address)
       })
+
+      it('', async () => {
+
+      })
+
     })
 
     describe('Failure', async () => {
@@ -226,6 +231,9 @@ describe('NFT', () => {
 
         await expect(nft.connect(minter).withdraw()).to.be.reverted
       })
+
     })
+
   })
+
 })
