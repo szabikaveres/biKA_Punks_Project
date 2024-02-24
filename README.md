@@ -16,7 +16,9 @@
 
  This token and smart-contract has been created as per ERC-721 Non-Fungible Token standard, used OpenZeppelin library and tests developed as per Hardhat specifics.
 
- The images are stored and handled using the I.P.F.S protocol.
+ The images are stored on Pinata and handled using the I.P.F.S protocol.
+
+ Front-End created with React.js and website deployed to Fleek.
 
 
  Token name: "Bika Punks"
@@ -25,10 +27,10 @@
 
  Max supply: 25 
 
- Token contract address: '#'
+ Token contract address: '0x1b9456B10178d408A59254739132093B48f66512'
 
  # How to interact with the project:
-1. Go to [('#')].
+1. Go to [(https://muddy-band-2244.on.fleek.co/)].
 2. Connect your wallet.
 3. Sign in to the contract.
 4. Select Sepolia TESTNET.
@@ -58,5 +60,9 @@ Thank you. Hope you enjoyed it.
 • OpenZeppelin: https://www.openzeppelin.com
 
 • I.P.F.S: https://www.ipfs.io
+
+• Pinata: https://app.pinata.cloud
+
+• Fleek: https://fleek.co/
 
 # All rights reserved: Szabika Veres -  https://github.com/szabikaveres
