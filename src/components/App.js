@@ -9,6 +9,7 @@ import preview from '../preview.png';
 // Components
 import Navigation from './Navigation';
 import Data from './Data';
+import Mint from './Mint';
 import Loading from './Loading';
 
 // ABIs: Import your contract ABIs here
@@ -36,17 +37,16 @@ function App() {
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     setProvider(provider)
 
-    //Initiate contract
+    // Initiate contract
     const nft = new ethers.Contract(config[31337].nft.address, NFT_ABI, provider)
     setNFT(nft)
-
 
     // Fetch accounts
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
     const account = ethers.utils.getAddress(accounts[0])
     setAccount(account)
 
-    //Fetch countdown
+    // Fetch Countdown
     const allowMintingOn = await nft.allowMintingOn()
     setRevealTime(allowMintingOn.toString() + '000')
 
@@ -71,11 +71,12 @@ function App() {
     }
   }, [isLoading]);
 
+
   return(
     <Container>
       <Navigation account={account} />
 
-      <h1 className='my-4 text-center'>biKA Punks</h1>
+      <h1 className='my-4 text-center'>Dapp Punks</h1>
 
       {isLoading ? (
         <Loading />
@@ -83,22 +84,40 @@ function App() {
         <>
           <Row>
             <Col>
-            <img src={preview} alt="" />
+              {balance > 0 ? (
+                <div className='text-center'>
+                  <img
+                    src={`https://gateway.pinata.cloud/ipfs/bafybeia6mck4a3lnzha372afz5bmscotsmenkkns7rbq3r7t5y7ar5xtd4/${balance.toString()}.png`}
+                    alt="Open Punk"
+                    width="400px"
+                    height="400px"
+                  />
+                </div>
+              ) : (
+                <img src={preview} alt="" />
+              )}
             </Col>
-            <div className= 'my-4 text-center'>
-              <Countdown date={parseInt(revealTime)} className = 'h2'/>
-            </div>
-
-            <Data 
-            maxSupply={maxSupply} 
-            totalSupply={totalSupply} 
-            cost={cost} 
-            balance={balance}
-            />
 
             <Col>
-              
+              <div className='my-4 text-center'>
+                <Countdown date={parseInt(revealTime)} className='h2' />
+              </div>
+
+              <Data
+                maxSupply={maxSupply}
+                totalSupply={totalSupply}
+                cost={cost}
+                balance={balance}
+              />
+
+              <Mint
+                provider={provider}
+                nft={nft}
+                cost={cost}
+                setIsLoading={setIsLoading}
+              />
             </Col>
+
           </Row>
         </>
       )}
